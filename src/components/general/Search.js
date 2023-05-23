@@ -28,17 +28,19 @@ const SearchSingleResult = ({ result, lastResultIndex, index }) => {
 			)}>
 			<div className="h-[80px] w-[70px] overflow-hidden relative">
 				<BookImage className="flex-shrink-0" />
-				<img
-					onLoad={() => setImageLoaded(true)}
-					className={clsx(
-						'h-full w-full absolute top-0 left-0 rounded-lg opacity-0 pointer-events-none',
-						{
-							'!opacity-100 !pointer-events-auto': imageLoaded,
-						}
-					)}
-					alt={result?.volumeInfo?.title}
-					src={result?.volumeInfo?.imageLinks?.smallThumbnail}
-				/>
+				{result?.volumeInfo?.imageLinks?.smallThumbnail && (
+					<img
+						onLoad={() => setImageLoaded(true)}
+						className={clsx(
+							'h-full w-full absolute top-0 left-0 rounded-lg opacity-0 pointer-events-none',
+							{
+								'!opacity-100 !pointer-events-auto': imageLoaded,
+							}
+						)}
+						alt={result?.volumeInfo?.title}
+						src={result?.volumeInfo?.imageLinks?.smallThumbnail}
+					/>
+				)}
 			</div>
 			<div className="flex-1 flex flex-col space-y-4">
 				<div className="flex flex-col space-y-2">
@@ -120,7 +122,7 @@ const SearchResults = ({ results }) => {
 				style={{ height: containerHeight - 80 }}>
 				{results.map((result, index) => (
 					<SearchSingleResult
-						key={index}
+						key={result.id}
 						index={index}
 						result={result}
 						lastResultIndex={results.length - 1}
@@ -152,6 +154,7 @@ const Search = () => {
 		} catch (e) {
 			toast.error('There was an error');
 			setLoading(false);
+			setResults([]);
 		}
 	};
 
