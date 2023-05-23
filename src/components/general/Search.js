@@ -6,11 +6,22 @@ import { ReactComponent as ArrowRight } from 'assets/icons/arrow-right.svg';
 import { ReactComponent as BookImage } from 'assets/images/book-image.svg';
 import { toast } from 'react-hot-toast';
 import api from 'api';
+import { useNavigate, generatePath } from 'react-router-dom';
 
 // const TABS = ['Journals', 'Books', 'Articles'];
 const TABS = ['Books'];
 
 const SearchSingleResult = ({ result, lastResultIndex, index }) => {
+	const [id, setId] = useState()
+	const navigate = useNavigate()
+	
+	const handleBook = () => {
+		setId(result.id)
+	}
+	useEffect(()=>{
+		id && navigate(generatePath("/books/:id", { id }));
+	},[id,navigate])
+
 	const [imageLoaded, setImageLoaded] = useState(false);
 	const getAuthors = () => {
 		return result?.volumeInfo?.authors?.join(',');
@@ -19,13 +30,13 @@ const SearchSingleResult = ({ result, lastResultIndex, index }) => {
 		return result?.volumeInfo?.publishedDate?.split('-')?.[0];
 	};
 	return (
-		<div
+		<div 
 			className={clsx(
-				'pt-[10px] pb-[7px] pl-5 pr-[27px] flex items-center space-x-6',
+				'pt-[10px] pb-[7px] pl-5 pr-[27px] flex items-center space-x-6 cursor-pointer',
 				{
 					'border-b border-b-D9DCE0': index !== lastResultIndex,
 				}
-			)}>
+			)} onClick={handleBook}>
 			<div className="h-[80px] w-[70px] overflow-hidden relative">
 				<BookImage className="flex-shrink-0" />
 				<img
@@ -123,7 +134,7 @@ const SearchResults = ({ results }) => {
 						index={index}
 						result={result}
 						lastResultIndex={results.length - 1}
-					/>
+					/>	
 				))}
 			</div>
 		</div>
