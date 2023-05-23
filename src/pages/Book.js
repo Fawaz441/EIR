@@ -13,18 +13,18 @@ const Book = () => {
 
     const volumeId = id
 
-    const getResult = async () => {
-		try {
-			const { data } = await api.searchForBook(volumeId);
-			setResult(data.items[0]);
-            console.log(data.items[0])
-         
-		} catch (e) {
-			toast.error('There was an error');
-		}
-	};
-    
     useEffect(()=>{
+        
+        const getResult = async () => {
+            try {
+                const { data } = await api.searchForBook(volumeId);
+                setResult(data.items[0]);
+                console.log(data.items[0])
+             
+            } catch (e) {
+                toast.error('There was an error');
+            }
+        };
         volumeId && getResult(volumeId)
     },[volumeId])
 
