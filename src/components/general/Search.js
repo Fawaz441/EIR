@@ -42,6 +42,7 @@ const fakeResults = [
 ];
 
 const SearchSingleResult = ({ result, lastResultIndex, index }) => {
+	const [imageLoaded, setImageLoaded] = useState(false);
 	const getAuthors = () => {
 		return result?.volumeInfo?.authors?.join(',');
 	};
@@ -56,13 +57,26 @@ const SearchSingleResult = ({ result, lastResultIndex, index }) => {
 					'border-b border-b-D9DCE0': index !== lastResultIndex,
 				}
 			)}>
-			<BookImage className="flex-shrink-0" />
+			<div className="h-[80px] w-[70px] overflow-hidden relative">
+				<BookImage className="flex-shrink-0" />
+				<img
+					onLoad={() => setImageLoaded(true)}
+					className={clsx(
+						'h-full w-full absolute top-0 left-0 rounded-lg opacity-0 pointer-events-none',
+						{
+							'!opacity-100 !pointer-events-auto': imageLoaded,
+						}
+					)}
+					alt={result?.volumeInfo?.title}
+					src={result?.volumeInfo?.imageLinks?.smallThumbnail}
+				/>
+			</div>
 			<div className="flex-1 flex flex-col space-y-4">
 				<div className="flex flex-col space-y-2">
 					<h3 className="font-bold text-base text-101E30">
 						{result.volumeInfo?.title}
 					</h3>
-					<span className="font-medium text-[12px] leading-[9.31px] text-828282">
+					<span className="font-medium text-[12px] text-828282">
 						{getAuthors()}
 					</span>
 				</div>
@@ -103,7 +117,7 @@ const SearchResults = ({ results }) => {
 				maxHeight: `${containerHeight}px`,
 			}}
 			className={clsx(
-				'transition-all duration-500 top-[calc(350.25px_+_12.5vh)] z-[2] py-[13px] w-[741px] left-[50%] -translate-x-[50%] rounded-[32px] bg-white fixed border border-D9DCE0',
+				'transition-all duration-500 top-[calc(350.25px_+_12.5vh)] z-[2] py-[13px] w-[741px] left-[50%] overflow-hidden -translate-x-[50%] rounded-[32px] bg-white fixed border border-D9DCE0',
 				{ 'opacity-0 pointer-events-none': results.length === 0 }
 			)}>
 			<div className="flex items-center h-[64px] justify-between px-[37px] border-b border-b-[#EFEFEF]/[.6]">
@@ -183,7 +197,7 @@ const Search = () => {
 			/>
 			<div className="ml-1 flex-shrink-0">
 				{loading ? (
-					<div class="lds-ring scale-50 mr-[-30px] mb-[-10px]">
+					<div className="lds-ring scale-50 mr-[-30px] mb-[-10px]">
 						<div></div>
 						<div></div>
 						<div></div>
