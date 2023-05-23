@@ -116,6 +116,7 @@ const SearchResults = ({ results }) => {
 			</div>
 			<div
 				className="overflow-auto scrollbar-hide"
+				id="search-results"
 				style={{ height: containerHeight - 80 }}>
 				{results.map((result, index) => (
 					<SearchSingleResult
@@ -141,6 +142,12 @@ const Search = () => {
 		try {
 			const { data } = await api.searchForBook(query);
 			setResults(data.items);
+			setTimeout(() => {
+				let resultsContainer = document.getElementById('search-results');
+				if (resultsContainer) {
+					resultsContainer.scrollTop = 0;
+				}
+			}, 1000);
 			setLoading(false);
 		} catch (e) {
 			toast.error('There was an error');
@@ -160,7 +167,7 @@ const Search = () => {
 		<div className="flex relative px-[33px] items-center space-x-1 bg-white h-[76px] w-[741px] shadow-[0_7px_47px_0px_rgba(0,0,0,0.02)] rounded-[95px] justify-between border border-D9DCE0">
 			<input
 				type="text"
-				className="placeholder:text-A3ABB6 text-xl leading-[15.52px] h-[74px] font-medium text-black flex-1 border-none outline-none"
+				className="placeholder:text-A3ABB6 text-xl leading-[15.52px] h-full font-medium text-black flex-1 border-none outline-none"
 				placeholder="Search for books, articles and files from our large repo"
 				onChange={({ target: { value } }) => setSearchQuery(value)}
 			/>
