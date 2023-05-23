@@ -1,5 +1,11 @@
+import AppRoutes from 'Routes';
+
 function App() {
-	return <div className="App">Educational Information Retreival System</div>;
+	return (
+		<div className="min-h-screen bg-F8F9FA">
+			<AppRoutes />
+		</div>
+	);
 }
 
 export default App;
