@@ -10,37 +10,6 @@ import api from 'api';
 // const TABS = ['Journals', 'Books', 'Articles'];
 const TABS = ['Books'];
 
-const fakeResults = [
-	{
-		name: 'Notebooks of Leonardo Davinci',
-		author: 'Davinci Leonardo',
-		type: 'Book',
-		year: '1990',
-		extra: 'Santi',
-	},
-	{
-		name: 'Notebooks of Leonardo Davinci',
-		author: 'Davinci Leonardo',
-		type: 'Book',
-		year: '1990',
-		extra: 'Santi',
-	},
-	{
-		name: 'Notebooks of Leonardo Davinci',
-		author: 'Davinci Leonardo',
-		type: 'Book',
-		year: '1990',
-		extra: 'Santi',
-	},
-	{
-		name: 'Notebooks of Leonardo Davinci',
-		author: 'Davinci Leonardo',
-		type: 'Book',
-		year: '1990',
-		extra: 'Santi',
-	},
-];
-
 const SearchSingleResult = ({ result, lastResultIndex, index }) => {
 	const [imageLoaded, setImageLoaded] = useState(false);
 	const getAuthors = () => {
