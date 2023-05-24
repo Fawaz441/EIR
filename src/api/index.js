@@ -15,7 +15,6 @@ const api = {
   searchForABook: (volumeId) =>
     eirAxios.get(`/${volumeId}`, {
       params: {
-		volumeId: volumeId,
         key: process.env.REACT_APP_API_KEY,
       },
     }),
