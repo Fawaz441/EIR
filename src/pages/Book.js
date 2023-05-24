@@ -60,7 +60,7 @@ const Book = () => {
                 <div className=' absolute right-2 top-[10px] scale-[0.5] mr-2 '>
                 <SearchIcon/>
                 </div>
-                <div className='flex gap-2 flex-wrap mt-6 text-[14px] font-normal'>
+                <div className='flex gap-1 flex-wrap mt-6 text-[12px] font-normal'>
                     {searchOption.map((i, index)=> 
                     <button key={index} className='rounded-full px-[19px] py-[10px] border'>{i}</button>
                     )}
