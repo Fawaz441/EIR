@@ -19,7 +19,6 @@ const Book = () => {
             try {
                 const { data } = await api.searchForABook(volumeId);
                 setResult(data);
-                console.log(data)
              
             } catch (e) {
                 toast.error('There was an error');
