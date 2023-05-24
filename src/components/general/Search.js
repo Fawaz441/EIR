@@ -150,7 +150,7 @@ const SearchResults = ({ results, mini }) => {
 	);
 };
 
-const Search = ({ shouldShowResults, reset, mini }) => {
+const Search = ({ shouldShowResults, reset, mini, searchSuggestion }) => {
 	const [searchQuery, setSearchQuery] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [results, setResults] = useState([]);
@@ -191,7 +191,13 @@ const Search = ({ shouldShowResults, reset, mini }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [shouldShowResults]);
 
-	const onFocus = () => {
+	useEffect(()=> {
+		if(searchSuggestion){
+			setSearchQuery(searchSuggestion)
+		}
+	},[searchSuggestion])
+
+	const onFocus = () => {	
 		if (value && results.length === 0) {
 			getResults(value);
 		}
@@ -221,6 +227,7 @@ const Search = ({ shouldShowResults, reset, mini }) => {
 				}
 				onChange={({ target: { value } }) => setSearchQuery(value)}
 				onFocus={onFocus}
+				
 			/>
 			<div className="ml-1 flex-shrink-0">
 				{loading ? (
