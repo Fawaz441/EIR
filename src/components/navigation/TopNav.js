@@ -15,7 +15,7 @@ const TopNav = () => {
 					</span>
 				</div>
 			</Link>
-			<div className="flex items-center space-x-8">
+			{/* <div className="flex items-center space-x-8">
 				<span className="text-313131 font-medium text-[18px] leading-[13.97px]">
 					Discover
 				</span>
@@ -25,7 +25,7 @@ const TopNav = () => {
 				<span className="text-313131 font-medium text-[18px] leading-[13.97px]">
 					Upload something
 				</span>
-			</div>
+			</div> */}
 		</div>
 	);
 };
