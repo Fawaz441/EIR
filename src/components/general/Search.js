@@ -150,7 +150,7 @@ const SearchResults = ({ results, mini }) => {
 	);
 };
 
-const Search = ({ shouldShowResults, reset, mini, searchSuggestion }) => {
+const Search = ({ shouldShowResults, reset, mini, searchSuggestion, setSearchSuggestion }) => {
 	const [searchQuery, setSearchQuery] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [results, setResults] = useState([]);
@@ -198,6 +198,9 @@ const Search = ({ shouldShowResults, reset, mini, searchSuggestion }) => {
 	},[searchSuggestion])
 
 	const onFocus = () => {	
+		if (searchSuggestion){
+			setSearchSuggestion(null)
+		}
 		if (value && results.length === 0) {
 			getResults(value);
 		}
@@ -226,6 +229,7 @@ const Search = ({ shouldShowResults, reset, mini, searchSuggestion }) => {
 						: 'Search for books, articles and files from our large repo'
 				}
 				onChange={({ target: { value } }) => setSearchQuery(value)}
+				value={searchQuery}
 				onFocus={onFocus}
 				
 			/>
